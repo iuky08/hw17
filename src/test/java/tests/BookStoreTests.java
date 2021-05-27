@@ -13,7 +13,6 @@ import java.util.Map;
 import static filters.CustomLogFilter.customLogFilter;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -136,23 +135,15 @@ public class BookStoreTests {
     void booksModelTest() {
         Books books =
                 given()
+                        .filter(customLogFilter().withCustomTemplates())
+                        .contentType(JSON)
+                        .body("{ \"userName\": \"alex\", \"password\": \"asdsad#frew_DFS2\" }")
+                        .when()
                         .log().uri()
-                        .log().body()
-                        .get("https://demoqa.com/BookStore/v1/Books")
+                        .post("https://demoqa.com/Account/v1/GenerateToken")
                         .then()
                         .log().body()
                         .extract().as(Books.class);
         System.out.println(books);
-    }
-
-    @Test
-    void booksJsonSchemaTest() {
-        given()
-                .log().uri()
-                .log().body()
-                .get("https://demoqa.com/BookStore/v1/Books")
-                .then()
-                .log().body()
-                .body(matchesJsonSchemaInClasspath("jsonschemas/booklist_response.json"));
     }
 }
