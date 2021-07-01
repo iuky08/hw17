@@ -133,11 +133,14 @@ public class BookStoreTests {
 
     @Test
     void booksModelTest() {
+        Map<String, String> data = new HashMap<>();
+        data.put("userName",  "alex");
+        data.put("password",  "asdsad#frew_DFS2");
         Books books =
                 given()
                         .filter(customLogFilter().withCustomTemplates())
                         .contentType(JSON)
-                        .body("{ \"userName\": \"alex\", \"password\": \"asdsad#frew_DFS2\" }")
+                        .body(data)
                         .when()
                         .log().uri()
                         .post("https://demoqa.com/Account/v1/GenerateToken")
