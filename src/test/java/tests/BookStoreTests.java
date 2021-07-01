@@ -20,6 +20,7 @@ public class BookStoreTests {
     @Test
     void noLogsTest() {
         given()
+                .filter(customLogFilter().withCustomTemplates())
                 .get("https://demoqa.com/BookStore/v1/Books")
                 .then()
                 .body("books", hasSize(greaterThan(0)));
@@ -29,6 +30,7 @@ public class BookStoreTests {
     @Test
     void withAllLogsTest() {
         given()
+                .filter(customLogFilter().withCustomTemplates())
                 .log().all()
                 .get("https://demoqa.com/BookStore/v1/Books")
                 .then()
@@ -40,6 +42,7 @@ public class BookStoreTests {
     @Test
     void withSomeLogsTest() {
         given()
+                .filter(customLogFilter().withCustomTemplates())
                 .log().uri()
                 .get("https://demoqa.com/BookStore/v1/Books")
                 .then()
@@ -54,6 +57,7 @@ public class BookStoreTests {
         data.put("userName","alex");
         data.put("password","asdsad#frew_DFS2");
         given()
+                .filter(customLogFilter().withCustomTemplates())
                 .contentType(JSON)
                 .body(data.toString())
                 .when()
