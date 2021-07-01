@@ -1,4 +1,4 @@
-def allureTestOpsProjectId = '164'
+def allureTestOpsProjectId = '244'
 
 pipeline {
     agent any
