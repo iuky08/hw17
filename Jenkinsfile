@@ -44,8 +44,7 @@ pipeline {
                         " -Dproject.name='${JOB_BASE_NAME}'" +
                         " -Dlang='ru'" +
                         " -Denable.chart='true'" +
-                        " -Dallure.report.folder='./allure-report/'" +
-                        " -jar ${allureNotificationsFile}"
+                        " -Dallure.report.folder='./allure-report/'"
             }
         }
     }
